@@ -20,6 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // --- SCROLL REVEAL (Intersection Observer) ---
 const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
 
+// On touch devices, reveal an event image when its card is tapped.
+document.querySelectorAll('.event-card').forEach(card => {
+    card.addEventListener('pointerup', () => {
+        if (window.matchMedia('(hover: none)').matches) {
+            card.classList.toggle('is-revealed');
+        }
+    });
+});
+
 const revealOptions = {
     threshold: 0.15,
     rootMargin: "0px 0px -50px 0px"
