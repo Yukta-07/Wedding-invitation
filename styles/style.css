@@ -149,6 +149,7 @@ h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; }
     display: none;
     border: none;
     background: transparent;
+    border-radius: 0;
     cursor: pointer;
     width: 38px;
     height: 38px;
@@ -519,6 +520,22 @@ font-size: 0.78rem;
     align-items: center;
     gap: 10px;
 }
+.event-date-icon {
+    display: inline-flex;
+    flex: 0 0 2.35rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 2.35rem;
+    height: 2.35rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 0.35rem;
+    background: rgba(143, 95, 116, 0.85);
+    color: #fff;
+    line-height: 1;
+}
+.event-date-icon strong { font-size: 0.9rem; font-weight: 600; }
+.event-date-icon small { margin-top: 0.18rem; font-size: 0.48rem; letter-spacing: 0.08em; }
 
 /* --- THE EVENING (Horizontal Timeline) --- */
 .horizontal-timeline {
@@ -563,6 +580,14 @@ footer .footer-details {
     text-transform: uppercase;
     color: #b98d9d;
 }
+.footer-contact {
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: #a47788;
+}
+.footer-contact a { color: inherit; }
+.footer-contact a:hover { color: #8f5f74; text-decoration: underline; }
 
 @media (max-width: 640px) {
     .section-title { font-size: clamp(2rem, 8vw, 2.6rem); }

@@ -48,25 +48,16 @@
     </div>
 
     <!-- Background wedding music. Add your own MP3 at assets/wedding-song.mp3. -->
-    <audio id="wedding-music" loop preload="metadata" autoplay muted>
+    <audio id="wedding-music" loop preload="auto" autoplay>
         <source src="assets/music.mp3" type="audio/mpeg">
     </audio>
-    <button id="music-toggle" class="music-toggle" type="button" aria-label="Unmute wedding music" aria-pressed="false">
-        <span class="music-icon" aria-hidden="true">🔇</span>
+    <button id="music-toggle" class="music-toggle" type="button" aria-label="Mute wedding music" aria-pressed="true">
+        <span class="music-icon" aria-hidden="true">🔊</span>
     </button>
 
     <!-- HERO SECTION (From Screenshot 2026-08-06 155337.jpg) -->
     <header class="hero">
         <nav class="navbar">
-            <a class="nav-brand" href="#countdown" aria-label="Karan and Kumkum wedding invitation">
-                <span class="nav-brand-mark">K<span>&amp;</span>K</span>
-                <span class="nav-brand-caption">Karan &amp; Kumkum</span>
-            </a>
-            <button id="mobile-nav-toggle" class="nav-toggle" aria-expanded="false" aria-label="Open navigation menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
             <ul class="nav-links">
                 <li><a href="#countdown">Save the date</a></li>
                 <li><a href="#events">Events</a></li>
@@ -80,7 +71,7 @@
             <!-- <p class="hero-invitation">You're invited to our most awaited wedding</p> -->
             <div class="hero-names" aria-label="Karan and Kumkum">
                 <h1 class="hero-title">Karan</h1>
-                <p class="hero-parent">(S/O Om Prakash Sukeja & Priyanka Sukheja)</p>
+                <p class="hero-parent">(S/O Om Prakash Sukheja & Priyanka Sukheja)</p>
                 <p class="hero-with">with</p>
                 <h1 class="hero-title">Kumkum</h1>
                 <p class="hero-parent">(D/O Jitendra Manwani & Jaishree Manwani)</p>
@@ -220,7 +211,10 @@
                             <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
                                 <h3 class="event-title script-font text-2xl mb-3">Haldi / Carnival</h3>
                                 <ul class="event-info mt-3 text-sm text-white space-y-2 leading-6">
-                                    <li>📅 Saturday, September 12th, 2026 • 12:00 PM</li>
+                                    <li>
+                                        <span class="event-date-icon" aria-hidden="true"><strong>12</strong><small>SEP</small></span>
+                                        <span>Saturday, September 12th, 2026 • 12:00 PM</span>
+                                    </li>
                                     <li>📍 Near the pool area</li>
                                     <li>🎉 Bright colors, music, and celebration</li>
                                 </ul>
@@ -246,6 +240,25 @@
                 </div>
                    <!-- Event 3 -->
                 <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
+                    <img src="assets/reception.png" alt="Reception" class="w-full h-64 sm:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                        <div class="p-6 w-full">
+                            <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
+                                <h3 class="event-title script-font text-2xl mb-3">Reception</h3>
+                                <ul class="event-info mt-3 text-sm text-white space-y-2 leading-6">
+                                    <li>📅 Saturday, September 13th, 2026</li>
+                                    <li>🕒 Reception hour at 7:00 PM onwards</li>
+                                    <li>📍 The Garden Area</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- Event 4 -->
+                
+                <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
                     <img src="assets/pheras.png" alt="Pheras" class="w-full h-64 sm:h-80 object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
                         <div class="p-6 w-full">
@@ -254,24 +267,7 @@
                                 <ul class="event-info mt-3 text-sm text-white/90 space-y-2 leading-6">
                                     <li>📅 Sunday, September 13th, 2026 • 2:00 AM</li>
                                     <li>🕒 Please arrive by 1:45 AM</li>
-                                    <li>📍 The Garden Are</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-               
-                <!-- Event 4 -->
-                <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
-                    <img src="assets/reception.png" alt="Reception" class="w-full h-64 sm:h-80 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
-                        <div class="p-6 w-full">
-                            <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
-                                <h3 class="event-title script-font text-2xl mb-3">Reception</h3>
-                                <ul class="event-info mt-3 text-sm text-white space-y-2 leading-6">
-                                    <li>🕒 Reception hour at 7:00 PM onwards</li>
                                     <li>📍 The Garden Area</li>
-                                    <li>🎵 Dance Performance and DJ</li>
                                 </ul>
                             </div>
                         </div>
@@ -353,7 +349,7 @@
                     <h3 class="text-2xl font-serif text-[#b56d84] mb-4">Add to your calendar</h3>
                     <p class="text-sm text-[#977a7f] mb-6">Keep the evening reserved and get reminders.</p>
                     <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4 gap-4">
-                        <a id="calendar-link" href="wedding-invite.ics" download="karan-kumkum-wedding.ics" class="plan-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition" aria-label="Add wedding event to your calendar">Add to calendar</a>
+                        <a id="calendar-link" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Karan+%26+Kumkum+Wedding&amp;dates=20260913T133000Z%2F20260913T163000Z&amp;details=Save+the+date+for+Karan+and+Kumkum%27s+wedding+celebration+in+Udaipur.&amp;location=Udaipur%2C+Rajasthan" target="_blank" rel="noopener noreferrer" class="plan-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition" aria-label="Add wedding event to Google Calendar">Add to calendar</a>
                         <span class="text-xs uppercase tracking-[0.35em] text-[#d4b1b7]">September 13, 2026 • 7:00 PM IST</span>
                     </div>
                 </div>
@@ -378,7 +374,8 @@
             <div class="mx-auto mt-10 max-w-3xl rounded-[30px] bg-white/95 border border-white/80 shadow-[0_25px_80px_rgba(99,74,55,0.08)] p-8 text-left">
                 <p class="uppercase tracking-[0.35em] text-sm text-[#c68fa9] mb-4">Venue</p>
                 <h3 class="text-3xl font-serif text-[#b56d84] mb-4">
-                    <a href="https://maps.app.goo.gl/5L7xtdVJoLfujCPg8?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open Justa Sajjangarh in Google Maps">Justa Sajjangarh</a>
+                    <a href="https://maps.app.goo.gl/5L7xtdVJoLfujCPg8?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open Justa Sajjangarh in Google Maps">Justa Sajjangarh Resort & Spa
+                    </a>
                 </h3>
                 <a class="venue-address" href="https://maps.app.goo.gl/5L7xtdVJoLfujCPg8?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open venue address in Google Maps">Sajjangarh Fort Road, Bandhara, Udaipur, Rajasthan</a>
                 <div class="map-embed-wrapper overflow-hidden rounded-[24px] border border-[#e6d7c4]">
@@ -399,6 +396,11 @@
             <p class="text-sm uppercase tracking-[0.35em] mb-3 text-[#cfaab6]">With love</p>
             <p class="text-lg sm:text-xl font-serif">Sukheja Family</p>
             <p class="footer-details">Karan &amp; Kumkum &nbsp;•&nbsp; 13 Septemnber 26, 2026 &nbsp;•&nbsp; Udaipur, Rajasthan</p>
+            <p class="footer-contact">
+                <a href="tel:8114434205" aria-label="Call wedding contact">📞 8114434205</a>
+                <span aria-hidden="true">&nbsp;•&nbsp;</span>
+                <span>6-H-6, V.I.P Colony, Udaipur (Raj.)</span>
+            </p>
         </div>
     </footer>
 
@@ -408,39 +410,65 @@
     (() => {
         const calendarLink = document.getElementById('calendar-link');
         const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karan+%26+Kumkum+Wedding&dates=20260913T133000Z/20260913T163000Z&details=Save+the+date+for+Karan+and+Kumkum%27s+wedding+celebration+in+Udaipur.&location=Udaipur%2C+Rajasthan';
-        if (calendarLink && !('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+        if (calendarLink) {
             calendarLink.href = googleCalendarUrl;
             calendarLink.target = '_blank';
             calendarLink.rel = 'noopener noreferrer';
-            calendarLink.removeAttribute('download');
         }
 
         const music = document.getElementById('wedding-music');
         const toggle = document.getElementById('music-toggle');
+        const startMusic = async () => {
+            music.muted = false;
+            await music.play();
+            updateSoundButton();
+        };
         const updateSoundButton = () => {
-            const isMuted = music.muted;
-            toggle.classList.toggle('is-playing', !isMuted);
-            toggle.setAttribute('aria-pressed', String(!isMuted));
-            toggle.setAttribute('aria-label', isMuted ? 'Unmute wedding music' : 'Mute wedding music');
-            toggle.querySelector('.music-icon').textContent = isMuted ? '🔇' : '🔊';
+            const isPlaying = !music.paused && !music.muted;
+            toggle.classList.toggle('is-playing', isPlaying);
+            toggle.setAttribute('aria-pressed', String(isPlaying));
+            toggle.setAttribute('aria-label', isPlaying ? 'Mute wedding music' : 'Play wedding music');
+            toggle.querySelector('.music-icon').textContent = isPlaying ? '🔊' : '🔇';
         };
 
         toggle.addEventListener('click', async () => {
-            music.muted = !music.muted;
             try {
-                await music.play();
+                if (music.paused) {
+                    await startMusic();
+                } else {
+                    music.muted = !music.muted;
+                }
                 updateSoundButton();
             } catch {
-                toggle.disabled = true;
+                updateSoundButton();
             }
         });
 
+        // Start audio after the visitor's first interaction, which satisfies
+        // browser autoplay rules while keeping music on by default.
+        const startAfterInteraction = (event) => {
+            if (event.target.closest('#music-toggle')) return;
+            if (music.paused || music.muted) {
+                startMusic().catch(() => updateSoundButton());
+            }
+            document.removeEventListener('pointerdown', startAfterInteraction);
+            document.removeEventListener('keydown', startAfterInteraction);
+        };
+        document.addEventListener('pointerdown', startAfterInteraction, { once: true });
+        document.addEventListener('keydown', startAfterInteraction, { once: true });
+
         music.addEventListener('volumechange', updateSoundButton);
+        music.addEventListener('play', updateSoundButton);
+        music.addEventListener('pause', updateSoundButton);
         music.addEventListener('error', () => {
             toggle.disabled = true;
-            toggle.setAttribute('aria-label', 'Add a wedding music file to enable sound');
+            toggle.setAttribute('aria-label', 'Wedding music unavailable');
         });
         updateSoundButton();
+        music.play().catch(() => {
+            // Browsers may block unmuted autoplay; the button remains available.
+            updateSoundButton();
+        });
     })();
 </script>
 </body>
