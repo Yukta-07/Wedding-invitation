@@ -248,7 +248,7 @@ if(rsvpForm) {
     const goldField = decorLayer.querySelector('.gold-field');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const PETAL_EMOJI = ['🌸', '🌿', '🍃'];
+    const PETAL_EMOJI = ['🌸', '🌿'];
     const GOLD_COUNT = 14;
 
     // --- Build gold particles once ---
@@ -275,7 +275,7 @@ if(rsvpForm) {
     function spawnPetal() {
         if (reduceMotion) return;
         const now = performance.now();
-        if (now - lastSpawn < 900) return; // keep the falling flowers light and elegant
+        if (now - lastSpawn < 600) return; // keep a gentle, continuous flow
         lastSpawn = now;
 
         const petal = document.createElement('span');
@@ -283,8 +283,8 @@ if(rsvpForm) {
         petal.textContent = PETAL_EMOJI[Math.floor(Math.random() * PETAL_EMOJI.length)];
         petal.style.left = Math.random() * 100 + '%';
         petal.style.fontSize = (0.8 + Math.random() * 0.75) + 'rem';
-        petal.style.animationDuration = (10 + Math.random() * 5) + 's';
-        petal.style.animationDelay = (Math.random() * 0.65) + 's';
+        petal.style.animationDuration = (7 + Math.random() * 3) + 's';
+        petal.style.animationDelay = '0s';
         petal.style.transform = `translateX(${(Math.random() - 0.5) * 14}px)`;
         petalField.appendChild(petal);
 
@@ -296,8 +296,10 @@ if(rsvpForm) {
         if (!scrollActive) {
             scrollActive = true;
             decorLayer.classList.add('scroll-active');
+            // Keep the movement flowing instead of waiting for another scroll event.
+            window.setInterval(spawnPetal, 1400);
         }
-        // Spawn petals proportional to scroll velocity
+        // Start one immediately when the guest begins scrolling.
         spawnPetal();
     }
 
@@ -322,6 +324,7 @@ if(rsvpForm) {
     setTimeout(() => {
         if (!reduceMotion) {
             setTimeout(spawnPetal, 250);
+            setTimeout(spawnPetal, 900);
         }
     }, 1400);
 })();

@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karan & Kumkum | Wedding Invitation</title>
+    <meta name="description" content="Karan and Kumkum's wedding invitation. Join us for a beautiful celebration in Udaipur on 13 September 2026.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Karan & Kumkum | Wedding Invitation">
+    <meta property="og:description" content="Join Karan and Kumkum for their wedding celebration in Udaipur on 13 September 2026.">
+    <meta property="og:image" content="https://yukta-07.github.io/Wedding-invitation/assets/preview.png">
+    <meta property="og:image:alt" content="Karan and Kumkum wedding invitation preview">
+    <meta property="og:url" content="https://yukta-07.github.io/Wedding-invitation/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Karan & Kumkum | Wedding Invitation">
+    <meta name="twitter:description" content="Join Karan and Kumkum for their wedding celebration in Udaipur on 13 September 2026.">
+    <meta name="twitter:image" content="https://yukta-07.github.io/Wedding-invitation/assets/preview.png">
     
     <!-- Google Fonts matching the reference designs -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -36,7 +47,7 @@
 
     <!-- Background wedding music. Add your own MP3 at assets/wedding-song.mp3. -->
     <audio id="wedding-music" loop preload="metadata" autoplay muted>
-        <source src="assets/wedding-song.mp3" type="audio/mpeg">
+        <source src="assets/music.mp3" type="audio/mpeg">
     </audio>
     <button id="music-toggle" class="music-toggle" type="button" aria-label="Unmute wedding music" aria-pressed="false">
         <span class="music-icon" aria-hidden="true">🔇</span>
@@ -58,7 +69,6 @@
                 <li><a href="#countdown">Save the date</a></li>
                 <li><a href="#events">Events</a></li>
                 <li><a href="#haldi-palette">Haldi palette</a></li>
-                <li><a href="#venue-details">Location</a></li>
                 <li><a href="#venue-details">Venue</a></li>
                 <li><a href="#plan-evening" class="btn-rsvp">Plan your evening</a></li>
             </ul>
@@ -84,7 +94,7 @@
                 
                 <h2 class="section-title script-font">The celebration begins in</h2>
                 <p class="countdown-date">13 September 2026</p>
-                <p class="section-subtitle countdown-subtitle mx-auto max-w-2xl">A little more time until we're together in Udaipur.</p>
+                <p class="section-subtitle countdown-subtitle mx-auto max-w-2xl">A little more time until we celebrate</p>
                 <div class="countdown-grid grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 force-4cols">
                     <div class="countdown-card rounded-[30px] p-8 bg-white/95 shadow-[0_20px_50px_rgba(99,74,55,0.08)] border border-white/80 min-h-[140px] flex flex-col justify-center items-center">
                         <span id="countdown-days" class="text-[1.8rem] sm:text-[3rem] font-script text-[#5a3b2a] tracking-[-0.05em] mb-3">00</span>
@@ -106,6 +116,18 @@
                         <span class="text-xs uppercase tracking-[0.2em] text-[#8f725a]">Seconds</span>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- PRESENCE MESSAGE -->
+        <section class="presence-section section" aria-labelledby="presence-title">
+            <div class="container text-center">
+                <span class="presence-dot presence-dot-top-left" aria-hidden="true"></span>
+                <span class="presence-dot presence-dot-top-right" aria-hidden="true"></span>
+                <span class="presence-dot presence-dot-bottom-left" aria-hidden="true"></span>
+                <span class="presence-dot presence-dot-bottom-right" aria-hidden="true"></span>
+                <h2 id="presence-title" class="section-title script-font">Awaiting your presence</h2>
+                <p class="presence-message">Your presence will make our wedding celebration even more special. We look forward to celebrating this beautiful day with you.</p>
             </div>
         </section>
 
@@ -181,7 +203,7 @@
         </div>
     </section> -->
     <!-- EVENTS DETAILS (From events.jpg) -->
-    <section id="events" class="section bg-light">
+    <section id="events" class="section events-section">
         <div class="container text-center">
             <h2 class="section-title script-font">Events details</h2>
             <p class="section-subtitle">Join us for a day of love and celebration</p>
@@ -258,7 +280,7 @@
     </section>
 
     <!-- THE EVENING TIMELINE (From per events.jpg) -->
-    <section class="section bg-light">
+    <!-- <section class="section bg-light">
         <div class="container text-center">
             <h2 class="section-title script-font">The Evening</h2>
             <p class="section-subtitle" style="max-width: 600px; margin: 0 auto 60px;">WE WOULD LOVE TO CELEBRATE WITH YOU FULLY PRESENT, SO WE KINDLY ASK THAT LITTLE ONES STAY AT HOME FOR THE EVENING.</p>
@@ -292,7 +314,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- HALDI / CARNIVAL COLOR PALETTE -->
     <section id="haldi-palette" class="section bg-light haldi-palette-section">
@@ -329,7 +351,7 @@
                     <h3 class="text-2xl font-serif text-[#b56d84] mb-4">Add to your calendar</h3>
                     <p class="text-sm text-[#977a7f] mb-6">Keep the evening reserved and get reminders.</p>
                     <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4 gap-4">
-                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karan+%26+Kumkum+Wedding&dates=20260913T133000Z/20260913T163000Z&details=Save+the+date+for+Karan+and+Kumkum%27s+wedding+celebration+in+Udaipur.&location=Udaipur%2C+Rajasthan" target="_blank" rel="noopener noreferrer" class="plan-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition" aria-label="Add wedding event to Google Calendar">Add to calendar</a>
+                        <a id="calendar-link" href="wedding-invite.ics" download="karan-kumkum-wedding.ics" class="plan-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition" aria-label="Add wedding event to your calendar">Add to calendar</a>
                         <span class="text-xs uppercase tracking-[0.35em] text-[#d4b1b7]">September 13, 2026 • 7:00 PM IST</span>
                     </div>
                 </div>
@@ -344,6 +366,8 @@
         </div>
     </section>
 
+
+
     <section class="section bg-light" id="venue-details">
         <div class="container text-center">
             <h2 class="section-title script-font compact-section-title">Where we celebrate</h2>
@@ -351,11 +375,14 @@
 
             <div class="mx-auto mt-10 max-w-3xl rounded-[30px] bg-white/95 border border-white/80 shadow-[0_25px_80px_rgba(99,74,55,0.08)] p-8 text-left">
                 <p class="uppercase tracking-[0.35em] text-sm text-[#c68fa9] mb-4">Venue</p>
-                <h3 class="text-3xl font-serif text-[#b56d84] mb-4">Justa Sajjangarh</h3>
-                <p class="text-base text-[#977a7f] leading-8 mb-6">Sajjangarh Fort Road, Bandhara, Udaipur, Rajasthan</p>
+                <h3 class="text-3xl font-serif text-[#b56d84] mb-4">
+                    <a href="https://maps.app.goo.gl/5L7xtdVJoLfujCPg8?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open Justa Sajjangarh in Google Maps">Justa Sajjangarh</a>
+                </h3>
+                <a class="venue-address" href="https://maps.app.goo.gl/5L7xtdVJoLfujCPg8?g_st=ic" target="_blank" rel="noopener noreferrer" aria-label="Open venue address in Google Maps">Sajjangarh Fort Road, Bandhara, Udaipur, Rajasthan</a>
                 <div class="map-embed-wrapper overflow-hidden rounded-[24px] border border-[#e6d7c4]">
                     <iframe class="w-full h-[360px] border-0"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3582.987556322548!2d73.78456897494567!3d24.61255127873869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967ed4756d2dc6f%3A0x5a4c8d7b76e6ba8a!2sSajjangarh%20Fort%2C%20Udaipur%2C%20Rajasthan%20713111%2C%20India!5e0!3m2!1sen!2sus!4v1691481908200!5m2!1sen!2sus"
+                        src="https://www.google.com/maps?q=Justa%20Sajjangarh%2C%20Sajjangarh%20Fort%20Road%2C%20Udaipur%2C%20Rajasthan&output=embed"
+                        title="Map showing Justa Sajjangarh wedding venue"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
@@ -374,9 +401,18 @@
     </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script src="styles/js/animation.js"></script>
+<script src="./js/animation.js"></script>
 <script>
     (() => {
+        const calendarLink = document.getElementById('calendar-link');
+        const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karan+%26+Kumkum+Wedding&dates=20260913T133000Z/20260913T163000Z&details=Save+the+date+for+Karan+and+Kumkum%27s+wedding+celebration+in+Udaipur.&location=Udaipur%2C+Rajasthan';
+        if (calendarLink && !('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+            calendarLink.href = googleCalendarUrl;
+            calendarLink.target = '_blank';
+            calendarLink.rel = 'noopener noreferrer';
+            calendarLink.removeAttribute('download');
+        }
+
         const music = document.getElementById('wedding-music');
         const toggle = document.getElementById('music-toggle');
         const updateSoundButton = () => {

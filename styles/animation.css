@@ -127,7 +127,7 @@
     font-size: 1.15rem;
     opacity: 0;
     will-change: transform, opacity;
-    animation: petal-fall 12s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    /* animation: petal-fall 8s cubic-bezier(0.22, 0.61, 0.36, 1) forwards; */
 }
 .decor-layer.scroll-active .petal {
     animation-play-state: running;
