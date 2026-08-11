@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karan & Kumkum | Wedding Invitation</title>
+    
+    <!-- Google Fonts matching the reference designs -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Alex+Brush&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/animation.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body>
+
+    <!-- DECORATIVE SCROLL LAYER -->
+    <div class="decor-layer" aria-hidden="true">
+        <!-- Side flowers that appear on entry -->
+        <!-- <div class="side-flower side-flower-left">
+            <span class="flower-bloom">🌸</span>
+            <span class="flower-leaf">🌿</span>
+        </div> -->
+        <!-- <div class="side-flower side-flower-right">
+            <span class="flower-bloom">🌸</span>
+            <span class="flower-leaf">🌿</span>
+        </div> -->
+        <!-- Falling petals (spawned on scroll) -->
+        <div class="petal-field"></div>
+        <!-- Gold particles (appear on entry, float on scroll) -->
+        <div class="gold-field"></div>
+    </div>
+
+    <!-- Background wedding music. Add your own MP3 at assets/wedding-song.mp3. -->
+    <audio id="wedding-music" loop preload="metadata" autoplay muted>
+        <source src="assets/wedding-song.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-toggle" class="music-toggle" type="button" aria-label="Unmute wedding music" aria-pressed="false">
+        <span class="music-icon" aria-hidden="true">🔇</span>
+    </button>
+
+    <!-- HERO SECTION (From Screenshot 2026-08-06 155337.jpg) -->
+    <header class="hero">
+        <nav class="navbar">
+            <a class="nav-brand" href="#countdown" aria-label="Karan and Kumkum wedding invitation">
+                <span class="nav-brand-mark">K<span>&amp;</span>K</span>
+                <span class="nav-brand-caption">Karan &amp; Kumkum</span>
+            </a>
+            <button id="mobile-nav-toggle" class="nav-toggle" aria-expanded="false" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#countdown">Save the date</a></li>
+                <li><a href="#events">Events</a></li>
+                <li><a href="#haldi-palette">Haldi palette</a></li>
+                <li><a href="#venue-details">Location</a></li>
+                <li><a href="#venue-details">Venue</a></li>
+                <li><a href="#plan-evening" class="btn-rsvp">Plan your evening</a></li>
+            </ul>
+        </nav>
+        
+        <div class="hero-content">
+            <!-- <p class="hero-invitation">You're invited to our most awaited wedding</p> -->
+            <div class="hero-names" aria-label="Karan and Kumkum">
+                <h1 class="hero-title">Karan</h1>
+                <p class="hero-parent">(S/O Om Prakash Sukeja & Priyanka Sukheja)</p>
+                <p class="hero-with">with</p>
+                <h1 class="hero-title">Kumkum</h1>
+                <p class="hero-parent">(D/O Jitendra Manwani & Jaishree Manwani)</p>
+            </div>
+            
+        </div>
+    </header>
+
+        <!-- COUNTDOWN SECTION -->
+        <section id="countdown" class="section countdown-section">
+            <div class="container countdown-container mx-auto text-center px-4 sm:px-6 lg:px-8">
+                <p class="countdown-label uppercase tracking-[0.35em] text-sm text-[#8f725a] mb-4">Save the date</p>
+                
+                <h2 class="section-title script-font">The celebration begins in</h2>
+                <p class="countdown-date">13 September 2026</p>
+                <p class="section-subtitle countdown-subtitle mx-auto max-w-2xl">A little more time until we're together in Udaipur.</p>
+                <div class="countdown-grid grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10 force-4cols">
+                    <div class="countdown-card rounded-[30px] p-8 bg-white/95 shadow-[0_20px_50px_rgba(99,74,55,0.08)] border border-white/80 min-h-[140px] flex flex-col justify-center items-center">
+                        <span id="countdown-days" class="text-[1.8rem] sm:text-[3rem] font-script text-[#5a3b2a] tracking-[-0.05em] mb-3">00</span>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#8f725a]">Days</span>
+                    </div>
+                    <span class="countdown-separator" aria-hidden="true">:</span>
+                    <div class="countdown-card rounded-[30px] p-8 bg-white/95 shadow-[0_20px_50px_rgba(99,74,55,0.08)] border border-white/80 min-h-[140px] flex flex-col justify-center items-center">
+                        <span id="countdown-hours" class="text-[1.8rem] sm:text-[3rem] font-script text-[#5a3b2a] tracking-[-0.05em] mb-3">00</span>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#8f725a]">Hours</span>
+                    </div>
+                    <span class="countdown-separator" aria-hidden="true">:</span>
+                    <div class="countdown-card rounded-[30px] p-8 bg-white/95 shadow-[0_20px_50px_rgba(99,74,55,0.08)] border border-white/80 min-h-[140px] flex flex-col justify-center items-center">
+                        <span id="countdown-minutes" class="text-[1.8rem] sm:text-[3rem] font-script text-[#5a3b2a] tracking-[-0.05em] mb-3">00</span>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#8f725a]">Minutes</span>
+                    </div>
+                    <span class="countdown-separator" aria-hidden="true">:</span>
+                    <div class="countdown-card rounded-[30px] p-8 bg-white/95 shadow-[0_20px_50px_rgba(99,74,55,0.08)] border border-white/80 min-h-[140px] flex flex-col justify-center items-center">
+                        <span id="countdown-seconds" class="text-[1.8rem] sm:text-[3rem] font-script text-[#5a3b2a] tracking-[-0.05em] mb-3">00</span>
+                        <span class="text-xs uppercase tracking-[0.2em] text-[#8f725a]">Seconds</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OUR STORY (From our-story.jpg) -->
+    <!-- <section id="story" class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title script-font">Our love story</h2>
+            <p class="section-subtitle">From strangers to soulmates, here's how our story began</p>
+            
+            <div class="timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <span class="timeline-date">2020</span>
+                        <h3>First Meeting</h3>
+                        <p>We met at a mutual friend's dinner party. A brief conversation that sparked something more.</p>
+                    </div>
+                    <div class="timeline-img">
+                        <div class="img-placeholder">Image 1</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item right">
+                    <div class="timeline-img">
+                        <div class="img-placeholder">Image 2</div>
+                    </div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">2022</span>
+                        <h3>First Date</h3>
+                        <p>Coffee turned into a 4-hour conversation at our favorite cafe. We've been inseparable ever since.</p>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+<!-- PRE-WEDDING GALLERY CAROUSEL -->
+    <!-- <section id="gallery" class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title script-font">Pre-Wedding Memories</h2>
+            <p class="section-subtitle">Glimpses of our journey before the big day</p>
+            
+           
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+               
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&h=800&q=80" alt="Elegant traditional wedding couple">
+                    </div>
+                  
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&h=800&q=80" alt="Cinematic tone wedding details">
+                    </div>
+                  
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&w=600&h=800&q=80" alt="Main romantic shoot">
+                    </div>
+                  
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&h=800&q=80" alt="Beautiful wedding aesthetics">
+                    </div>
+               
+                    <div class="swiper-slide">
+                        <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=600&h=800&q=80" alt="Couple holding hands">
+                    </div>
+                </div>
+                
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section> -->
+    <!-- EVENTS DETAILS (From events.jpg) -->
+    <section id="events" class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title script-font">Events details</h2>
+            <p class="section-subtitle">Join us for a day of love and celebration</p>
+
+            <div class="events-grid grid grid-cols-1 sm:grid-cols-2 gap-8">
+             
+                <!-- Event 1 -->
+                <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
+                    <img src="assets/haldi (1).png" alt="Haldi Carnival" class="w-full h-64 sm:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                        <div class="p-6 w-full">
+                            <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
+                                <h3 class="event-title script-font text-2xl mb-3">Haldi / Carnival</h3>
+                                <ul class="event-info mt-3 text-sm text-white space-y-2 leading-6">
+                                    <li>📅 Saturday, September 12th, 2026 • 12:00 PM</li>
+                                    <li>📍 Near the pool area</li>
+                                    <li>🎉 Bright colors, music, and celebration</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Event 2 -->
+                <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
+                    <img src="assets/sangeet.png" alt="Sangeet" class="w-full h-64 sm:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                        <div class="p-6 w-full">
+                            <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
+                                <h3 class="event-title script-font text-2xl mb-3">Sangeet</h3>
+                                <ul class="event-info mt-3 text-sm text-white space-y-2 leading-6">
+                                    <li>📅 Saturday, September 12th, 2026 • 7:00 PM</li>
+                                    <li>📍 The Grand Celebration Hall</li>
+                                    <li>🎤 Dance, music, and family performances</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   <!-- Event 3 -->
+                <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
+                    <img src="assets/pheras.png" alt="Pheras" class="w-full h-64 sm:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                        <div class="p-6 w-full">
+                            <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
+                                <h3 class="event-title script-font text-2xl mb-3">Pheras</h3>
+                                <ul class="event-info mt-3 text-sm text-white/90 space-y-2 leading-6">
+                                    <li>📅 Sunday, September 13th, 2026 • 2:00 AM</li>
+                                    <li>🕒 Please arrive by 1:45 AM</li>
+                                    <li>📍 Sajjangarh Fort Road, Udaipur</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- Event 4 -->
+                <div class="event-card relative overflow-hidden rounded-lg shadow-lg">
+                    <img src="assets/reception.png" alt="Reception" class="w-full h-64 sm:h-80 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end">
+                        <div class="p-6 w-full">
+                            <div class="max-w-[90%] text-white drop-shadow-[0_1px_10px_rgba(0,0,0,0.6)]">
+                                <h3 class="event-title script-font text-2xl mb-3">Reception</h3>
+                                <ul class="event-info mt-3 text-sm text-white space-y-2 leading-6">
+                                    <li>🕒 Cocktail hour at 7:00 PM onwards</li>
+                                    <li>📍 The Banquet Hall</li>
+                                    <li>🎵 Dance Perfomance and DJ</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE EVENING TIMELINE (From per events.jpg) -->
+    <section class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title script-font">The Evening</h2>
+            <p class="section-subtitle" style="max-width: 600px; margin: 0 auto 60px;">WE WOULD LOVE TO CELEBRATE WITH YOU FULLY PRESENT, SO WE KINDLY ASK THAT LITTLE ONES STAY AT HOME FOR THE EVENING.</p>
+            
+            <div class="horizontal-timeline">
+                <div class="h-line"></div>
+                <div class="h-item">
+                    <div class="icon">🥂</div>
+                    <h4>COCKTAIL<br>RECEPTION</h4>
+                    <span>18:30</span>
+                </div>
+                <div class="h-item">
+                    <div class="icon">💍</div>
+                    <h4>WEDDING<br>CEREMONY</h4>
+                    <span>19:00</span>
+                </div>
+                <div class="h-item">
+                    <div class="icon">🍽️</div>
+                    <h4>DINNER</h4>
+                    <span>20:00</span>
+                </div>
+                <div class="h-item">
+                    <div class="icon">🎂</div>
+                    <h4>CAKE<br>CUTTING</h4>
+                    <span>22:00</span>
+                </div>
+                <div class="h-item">
+                    <div class="icon">✨</div>
+                    <h4>DANCING</h4>
+                    <span>all night</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HALDI / CARNIVAL COLOR PALETTE -->
+    <section id="haldi-palette" class="section bg-light haldi-palette-section">
+        <div class="container text-center">
+            <h2 class="section-title compact-section-title"><span class="script-font">Haldi</span> Color Palette</h2>
+            <p class="section-subtitle" style="max-width: 700px; margin: 0 auto 50px;">Bright, joyful shades for our Haldi / Carnival celebration. All colors are welcome.</p>
+            
+            <div class="palette-grid">
+                <div class="color-item">
+                    <div class="color-circle" style="background-color: #D3D9A3;"></div>
+                    <p>SAGE GREEN<br><span>#D3D9A3</span></p>
+                </div>
+                <div class="color-item">
+                    <div class="color-circle" style="background-color: #EBCED3;"></div>
+                    <p>BLUSH PINK<br><span>#EBCED3</span></p>
+                </div>
+                <div class="color-item">
+                    <div class="color-circle" style="background-color: #d9368a;"></div>
+                    <p>FUCHSIA PINK<br><span>#D9368A</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PLAN YOUR EVENING -->
+    <section id="plan-evening" class="section bg-light">
+        <div class="container text-center">
+            <h2 class="section-title script-font compact-section-title">Plan your evening</h2>
+            <p class="section-subtitle">Save the date and stay connected.</p>
+
+            <div class="plan-grid grid grid-cols-2  mt-10">
+                <div class="plan-card rounded-[30px] bg-white/95 border border-white/80 shadow-[0_25px_80px_rgba(99,74,55,0.08)] p-8 text-left">
+                    <p class="uppercase tracking-[0.35em] text-sm text-[#8f725a] mb-4">Save the date</p>
+                    <h3 class="text-2xl font-serif text-[#b56d84] mb-4">Add to your calendar</h3>
+                    <p class="text-sm text-[#977a7f] mb-6">Keep the evening reserved and get reminders.</p>
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4 gap-4">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Karan+%26+Kumkum+Wedding&dates=20260913T133000Z/20260913T163000Z&details=Save+the+date+for+Karan+and+Kumkum%27s+wedding+celebration+in+Udaipur.&location=Udaipur%2C+Rajasthan" target="_blank" rel="noopener noreferrer" class="plan-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition" aria-label="Add wedding event to Google Calendar">Add to calendar</a>
+                        <span class="text-xs uppercase tracking-[0.35em] text-[#d4b1b7]">September 13, 2026 • 7:00 PM IST</span>
+                    </div>
+                </div>
+
+                <div class="plan-card rounded-[30px] bg-white/95 border border-white/80 shadow-[0_25px_80px_rgba(99,74,55,0.08)] p-8 text-left">
+                    <p class="uppercase tracking-[0.35em] text-sm text-[#c68fa9] mb-4">Community</p>
+                    <h3 class="text-2xl font-serif text-[#b56d84] mb-4">Join the WhatsApp group</h3>
+                    <p class="text-sm text-[#977a7f] mb-6">Stay connected with guests and receive updates.</p>
+                    <a href="https://chat.whatsapp.com/JEBW1V67tkuHkEmutjJ3AJ?mode=gi_t" target="_blank" rel="noopener noreferrer" class="plan-button inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-lg transition" aria-label="Join wedding WhatsApp community">Join WhatsApp group</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section bg-light" id="venue-details">
+        <div class="container text-center">
+            <h2 class="section-title script-font compact-section-title">Where we celebrate</h2>
+            <p class="section-subtitle">Join us at a beautiful hilltop venue in Udaipur.</p>
+
+            <div class="mx-auto mt-10 max-w-3xl rounded-[30px] bg-white/95 border border-white/80 shadow-[0_25px_80px_rgba(99,74,55,0.08)] p-8 text-left">
+                <p class="uppercase tracking-[0.35em] text-sm text-[#c68fa9] mb-4">Venue</p>
+                <h3 class="text-3xl font-serif text-[#b56d84] mb-4">Justa Sajjangarh</h3>
+                <p class="text-base text-[#977a7f] leading-8 mb-6">Sajjangarh Fort Road, Bandhara, Udaipur, Rajasthan</p>
+                <div class="map-embed-wrapper overflow-hidden rounded-[24px] border border-[#e6d7c4]">
+                    <iframe class="w-full h-[360px] border-0"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3582.987556322548!2d73.78456897494567!3d24.61255127873869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967ed4756d2dc6f%3A0x5a4c8d7b76e6ba8a!2sSajjangarh%20Fort%2C%20Udaipur%2C%20Rajasthan%20713111%2C%20India!5e0!3m2!1sen!2sus!4v1691481908200!5m2!1sen!2sus"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#f4e3e8] text-[#7f5f70] py-8">
+        <div class="container text-center px-4 sm:px-6 lg:px-8">
+            <p class="text-sm uppercase tracking-[0.35em] mb-3 text-[#cfaab6]">With love</p>
+            <p class="text-lg sm:text-xl font-serif">Sukheja Family</p>
+            <p class="footer-details">Karan &amp; Kumkum &nbsp;•&nbsp; 13 Septemnber 26, 2026 &nbsp;•&nbsp; Udaipur, Rajasthan</p>
+        </div>
+    </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="styles/js/animation.js"></script>
+<script>
+    (() => {
+        const music = document.getElementById('wedding-music');
+        const toggle = document.getElementById('music-toggle');
+        const updateSoundButton = () => {
+            const isMuted = music.muted;
+            toggle.classList.toggle('is-playing', !isMuted);
+            toggle.setAttribute('aria-pressed', String(!isMuted));
+            toggle.setAttribute('aria-label', isMuted ? 'Unmute wedding music' : 'Mute wedding music');
+            toggle.querySelector('.music-icon').textContent = isMuted ? '🔇' : '🔊';
+        };
+
+        toggle.addEventListener('click', async () => {
+            music.muted = !music.muted;
+            try {
+                await music.play();
+                updateSoundButton();
+            } catch {
+                toggle.disabled = true;
+            }
+        });
+
+        music.addEventListener('volumechange', updateSoundButton);
+        music.addEventListener('error', () => {
+            toggle.disabled = true;
+            toggle.setAttribute('aria-label', 'Add a wedding music file to enable sound');
+        });
+        updateSoundButton();
+    })();
+</script>
+</body>
+</html>
