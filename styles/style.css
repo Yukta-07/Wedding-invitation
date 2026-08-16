@@ -95,6 +95,9 @@ h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; }
     .hero {
         background: #f4c8d5;
     }
+    .navbar {
+        display: none;
+    }
 }
 .navbar {
     display: flex;
@@ -454,6 +457,13 @@ font-size: 0.78rem;
 .section { padding: 70px 20px; }
 .bg-light { background-color: var(--bg-color); }
 .container { max-width: 1000px; margin: 0 auto; }
+
+@media (min-width: 769px) {
+    #plan-evening .plan-grid {
+        gap: 2rem;
+    }
+}
+
 .section-title {
     font-family: var(--font-script);
     font-size: clamp(2.25rem, 5vw, 3.5rem);
