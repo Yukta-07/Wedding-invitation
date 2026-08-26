@@ -234,14 +234,14 @@ h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; }
 }
 .scroll-hint {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 0.5rem;
     left: 50%;
     z-index: 2;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.25rem;
-    color: #181114;
+    color: #271709;
     font-family: var(--font-serif);
     font-size: 0.85rem;
     letter-spacing: 0.16em;
