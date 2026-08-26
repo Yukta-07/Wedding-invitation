@@ -47,8 +47,11 @@
         <div class="gold-field"></div>
     </div>
 
-    <!-- Background wedding music. Add your own MP3 at assets/wedding-song.mp3. -->
-    <audio id="wedding-music" loop preload="auto" autoplay>
+    <!--
+        Android and other mobile browsers only allow autoplay when the audio
+        starts muted. It is unmuted on the visitor's first interaction.
+    -->
+    <audio id="wedding-music" loop preload="auto" autoplay muted playsinline>
         <source src="assets/music.mp3" type="audio/mpeg">
     </audio>
     <button id="music-toggle" class="music-toggle" type="button" aria-label="Mute wedding music" aria-pressed="true">
@@ -426,9 +429,11 @@
 
         const music = document.getElementById('wedding-music');
         const toggle = document.getElementById('music-toggle');
-        const startMusic = async () => {
-            music.muted = false;
+        let userMuted = false;
+        const startMusic = async (unmute = true) => {
+            if (userMuted) return;
             await music.play();
+            if (unmute) music.muted = false;
             updateSoundButton();
         };
         const updateSoundButton = () => {
@@ -442,9 +447,11 @@
         toggle.addEventListener('click', async () => {
             try {
                 if (music.paused) {
+                    userMuted = false;
                     await startMusic();
                 } else {
                     music.muted = !music.muted;
+                    userMuted = music.muted;
                 }
                 updateSoundButton();
             } catch {
@@ -452,13 +459,11 @@
             }
         });
 
-        // Start audio after the visitor's first interaction, which satisfies
-        // browser autoplay rules while keeping music on by default.
+        // Unmute after the visitor's first interaction. This satisfies
+        // Android autoplay rules while keeping music on by default.
         const startAfterInteraction = (event) => {
             if (event.target.closest('#music-toggle')) return;
-            if (music.paused || music.muted) {
-                startMusic().catch(() => updateSoundButton());
-            }
+            startMusic().catch(() => updateSoundButton());
             document.removeEventListener('pointerdown', startAfterInteraction);
             document.removeEventListener('keydown', startAfterInteraction);
         };
@@ -474,7 +479,8 @@
         });
         updateSoundButton();
         music.play().catch(() => {
-            // Browsers may block unmuted autoplay; the button remains available.
+            // Muted autoplay can still be blocked in some browsers; the first
+            // visitor interaction will retry and unmute the music.
             updateSoundButton();
         });
     })();
