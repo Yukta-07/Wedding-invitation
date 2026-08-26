@@ -48,7 +48,7 @@
     </div>
 
     <!-- Music starts automatically where the browser permits it. -->
-    <audio id="wedding-music" loop preload="auto" autoplay playsinline>
+    <audio id="wedding-music" loop preload="auto">
         <source src="assets/music.mp3" type="audio/mpeg">
     </audio>
     <button id="music-toggle" class="music-toggle" type="button" aria-label="Mute wedding music" aria-pressed="true">
@@ -428,67 +428,396 @@
             calendarLink.rel = 'noopener noreferrer';
         }
 
-        const music = document.getElementById('wedding-music');
-        const toggle = document.getElementById('music-toggle');
-        const startMusic = async () => {
-            music.muted = false;
-            await music.play();
-            updateSoundButton();
-        };
-        const updateSoundButton = () => {
-            const isPlaying = !music.paused && !music.muted;
-            toggle.classList.toggle('is-playing', isPlaying);
-            toggle.setAttribute('aria-pressed', String(isPlaying));
-            toggle.setAttribute('aria-label', isPlaying ? 'Mute wedding music' : 'Play wedding music');
-            toggle.querySelector('.music-icon').textContent = isPlaying ? '🔊' : '🔇';
-        };
+          /* =========================================================
+       WEDDING MUSIC
+       ========================================================= */
 
-        toggle.addEventListener('click', async () => {
+    const music = document.getElementById('wedding-music');
+    const toggle = document.getElementById('music-toggle');
+
+    // Make sure the audio elements exist
+    if (!music || !toggle) {
+        console.warn('Wedding music elements not found.');
+        return;
+    }
+
+    const musicIcon = toggle.querySelector('.music-icon');
+
+    let musicStarted = false;
+    let leavingPage = false;
+
+
+    /* =========================================================
+       UPDATE SOUND BUTTON
+       ========================================================= */
+
+    function updateSoundButton() {
+
+        const isPlaying =
+            !music.paused &&
+            !music.muted;
+
+        toggle.classList.toggle(
+            'is-playing',
+            isPlaying
+        );
+
+        toggle.setAttribute(
+            'aria-pressed',
+            String(isPlaying)
+        );
+
+        toggle.setAttribute(
+            'aria-label',
+            isPlaying
+                ? 'Mute wedding music'
+                : 'Play wedding music'
+        );
+
+        if (musicIcon) {
+            musicIcon.textContent =
+                isPlaying ? '🔊' : '🔇';
+        }
+    }
+
+
+    /* =========================================================
+       START MUSIC
+       ========================================================= */
+
+    async function startMusic() {
+
+        if (leavingPage) {
+            return false;
+        }
+
+        try {
+
+            music.muted = false;
+            music.volume = 1;
+
+            await music.play();
+
+            musicStarted = true;
+
+            updateSoundButton();
+
+            return true;
+
+        } catch (error) {
+
+            console.log(
+                'Wedding music autoplay blocked:',
+                error
+            );
+
+            updateSoundButton();
+
+            return false;
+        }
+    }
+
+
+    /* =========================================================
+       STOP MUSIC
+       ========================================================= */
+
+    function stopMusic(resetPosition = true) {
+
+        try {
+
+            music.pause();
+
+            if (resetPosition) {
+                music.currentTime = 0;
+            }
+
+            musicStarted = false;
+
+            updateSoundButton();
+
+        } catch (error) {
+
+            console.warn(
+                'Unable to stop wedding music:',
+                error
+            );
+        }
+    }
+
+
+    /* =========================================================
+       SOUND BUTTON
+       ========================================================= */
+
+    toggle.addEventListener(
+        'click',
+        async function (event) {
+
+            event.preventDefault();
+
             try {
+
+                // If music is not playing, start it
                 if (music.paused) {
-                    await startMusic();
+
+                    music.muted = false;
+
+                    await music.play();
+
+                    musicStarted = true;
+
                 } else {
+
+                    // If playing, mute/unmute
                     music.muted = !music.muted;
                 }
-                updateSoundButton();
-            } catch {
-                updateSoundButton();
+
+            } catch (error) {
+
+                console.log(
+                    'Wedding music button error:',
+                    error
+                );
             }
-        });
 
-        // Android browsers block autoplay with sound until there is a user
-        // gesture. Start the music on the first tap/click or key press, but
-        // do not use scrolling as a trigger.
-        const startOnFirstInteraction = (event) => {
-            if (event.target.closest('#music-toggle')) return;
-            startMusic().catch(() => updateSoundButton());
-            document.removeEventListener('pointerdown', startOnFirstInteraction);
-            document.removeEventListener('keydown', startOnFirstInteraction);
-        };
-        document.addEventListener('pointerdown', startOnFirstInteraction, { once: true });
-        document.addEventListener('keydown', startOnFirstInteraction, { once: true });
-
-        music.addEventListener('volumechange', updateSoundButton);
-        music.addEventListener('play', updateSoundButton);
-        music.addEventListener('pause', updateSoundButton);
-        music.addEventListener('error', () => {
-            toggle.disabled = true;
-            toggle.setAttribute('aria-label', 'Wedding music unavailable');
-        });
-
-        // Stop playback when the page is closed, refreshed, or left.
-        // This also prevents the song from continuing during page navigation.
-        window.addEventListener('pagehide', () => {
-            music.pause();
-            music.currentTime = 0;
-        });
-
-        updateSoundButton();
-        music.play().catch(() => {
-            // Browsers such as Android Chrome may block unmuted autoplay.
-            // Music is not started by scrolling; the button can start it.
             updateSoundButton();
-        });
+        }
+    );
+
+
+    /* =========================================================
+       START MUSIC ON FIRST USER INTERACTION
+       =========================================================
+
+       IMPORTANT:
+
+       We intentionally DO NOT use:
+
+           { once: true }
+
+       because if the first interaction is on the music
+       button, the listener could disappear before playback
+       starts.
+
+       The music will start when the visitor first:
+       - taps anywhere
+       - clicks anywhere
+       - touches the page
+       - presses a keyboard key
+
+       Scrolling is NOT used as a trigger.
+       ========================================================= */
+
+    async function startOnFirstInteraction(event) {
+
+        // Don't interfere with the music button.
+        if (
+            event.target &&
+            event.target.closest &&
+            event.target.closest('#music-toggle')
+        ) {
+            return;
+        }
+
+        // Already playing
+        if (musicStarted || !music.paused) {
+            removeInteractionListeners();
+            return;
+        }
+
+        const started = await startMusic();
+
+        // Only remove listeners after successful playback
+        if (started) {
+            removeInteractionListeners();
+        }
+    }
+
+
+    function removeInteractionListeners() {
+
+        document.removeEventListener(
+            'pointerdown',
+            startOnFirstInteraction
+        );
+
+        document.removeEventListener(
+            'touchstart',
+            startOnFirstInteraction
+        );
+
+        document.removeEventListener(
+            'keydown',
+            startOnFirstInteraction
+        );
+    }
+
+
+    /* =========================================================
+       FIRST USER INTERACTION
+       ========================================================= */
+
+    document.addEventListener(
+        'pointerdown',
+        startOnFirstInteraction,
+        { passive: true }
+    );
+
+    document.addEventListener(
+        'touchstart',
+        startOnFirstInteraction,
+        { passive: true }
+    );
+
+    document.addEventListener(
+        'keydown',
+        startOnFirstInteraction
+    );
+
+
+    /* =========================================================
+       AUDIO EVENTS
+       ========================================================= */
+
+    music.addEventListener(
+        'play',
+        function () {
+            musicStarted = true;
+            updateSoundButton();
+        }
+    );
+
+    music.addEventListener(
+        'pause',
+        function () {
+            updateSoundButton();
+        }
+    );
+
+    music.addEventListener(
+        'volumechange',
+        function () {
+            updateSoundButton();
+        }
+    );
+
+
+    /* =========================================================
+       AUDIO ERROR
+       ========================================================= */
+
+    music.addEventListener(
+        'error',
+        function () {
+
+            console.error(
+                'Wedding music could not be loaded.'
+            );
+
+            toggle.disabled = true;
+
+            toggle.setAttribute(
+                'aria-label',
+                'Wedding music unavailable'
+            );
+
+            if (musicIcon) {
+                musicIcon.textContent = '🔇';
+            }
+        }
+    );
+
+
+    /* =========================================================
+       STOP WHEN TAB/PAGE BECOMES HIDDEN
+       =========================================================
+
+       This handles:
+       - switching tabs
+       - minimizing browser
+       - locking mobile phone
+       - switching to another app
+       - putting browser in background
+       ========================================================= */
+
+    document.addEventListener(
+        'visibilitychange',
+        function () {
+
+            if (
+                document.visibilityState === 'hidden'
+            ) {
+
+                stopMusic(true);
+            }
+        }
+    );
+
+
+    /* =========================================================
+       STOP WHEN PAGE IS LEFT
+       =========================================================
+
+       Handles:
+       - navigation
+       - refresh
+       - closing tab in browsers that fire pagehide
+       - back/forward navigation
+       ========================================================= */
+
+    window.addEventListener(
+        'pagehide',
+        function () {
+
+            leavingPage = true;
+
+            stopMusic(true);
+        }
+    );
+
+
+    /* =========================================================
+       ADDITIONAL PROTECTION FOR REFRESH/NAVIGATION
+       ========================================================= */
+
+    window.addEventListener(
+        'beforeunload',
+        function () {
+
+            leavingPage = true;
+
+            try {
+                music.pause();
+                music.currentTime = 0;
+            } catch (error) {
+                // Ignore unload errors
+            }
+        }
+    );
+
+
+    /* =========================================================
+       CHROME PAGE FREEZE
+       ========================================================= */
+
+    document.addEventListener(
+        'freeze',
+        function () {
+
+            stopMusic(true);
+        }
+    );
+
+
+    /* =========================================================
+       INITIAL STATE
+       ========================================================= */
+
+    music.muted = false;
+    music.volume = 1;
+
+    updateSoundButton();
     })();
 </script>
 </body>
