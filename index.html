@@ -459,6 +459,14 @@
             toggle.disabled = true;
             toggle.setAttribute('aria-label', 'Wedding music unavailable');
         });
+
+        // Stop playback when the page is closed, refreshed, or left.
+        // This also prevents the song from continuing during page navigation.
+        window.addEventListener('pagehide', () => {
+            music.pause();
+            music.currentTime = 0;
+        });
+
         updateSoundButton();
         music.play().catch(() => {
             // Browsers such as Android Chrome may block unmuted autoplay.
