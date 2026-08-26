@@ -452,6 +452,18 @@
             }
         });
 
+        // Android browsers block autoplay with sound until there is a user
+        // gesture. Start the music on the first tap/click or key press, but
+        // do not use scrolling as a trigger.
+        const startOnFirstInteraction = (event) => {
+            if (event.target.closest('#music-toggle')) return;
+            startMusic().catch(() => updateSoundButton());
+            document.removeEventListener('pointerdown', startOnFirstInteraction);
+            document.removeEventListener('keydown', startOnFirstInteraction);
+        };
+        document.addEventListener('pointerdown', startOnFirstInteraction, { once: true });
+        document.addEventListener('keydown', startOnFirstInteraction, { once: true });
+
         music.addEventListener('volumechange', updateSoundButton);
         music.addEventListener('play', updateSoundButton);
         music.addEventListener('pause', updateSoundButton);
