@@ -36,7 +36,7 @@ ul { list-style: none; }
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.92);
-    color: #6d4932;
+    color: #14020a;
     box-shadow: 0 8px 24px rgba(99, 74, 55, 0.16);
     cursor: pointer;
     font: 1.2rem var(--font-sans);
@@ -231,6 +231,39 @@ h1, h2, h3, h4 { font-family: var(--font-serif); font-weight: 400; }
     text-align: center;
     color: #6d4932;
     text-shadow: 0 1px 1px rgba(255, 248, 232, 0.7);
+}
+.scroll-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    color: #181114;
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.scroll-hint:hover {
+    opacity: 0.75;
+    transform: translateX(-50%) translateY(-2px);
+}
+.scroll-arrow {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+@keyframes scroll-bounce {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50% { transform: rotate(45deg) translate(4px, 4px); }
 }
 .hero-invitation, .hero-presence {
     font-family: var(--font-serif);
